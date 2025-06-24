@@ -84,11 +84,14 @@ container.addEventListener("drop", (e) => {
   }
 });
 
+let activeStreamId = null;
+
 function renderStreams() {
   dash.innerHTML = "";
   const count = streams.length;
   const cols = Math.ceil(Math.sqrt(count)) || 1;
   dash.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+
   if (count === 0) {
     const hint = document.createElement("p");
     hint.style.gridColumn = "1/-1";
@@ -98,10 +101,79 @@ function renderStreams() {
     dash.appendChild(hint);
     return;
   }
+
   streams.forEach((id) => {
     const cell = document.createElement("div");
     cell.classList.add("stream");
     cell.setAttribute("data-id", id);
+
+    if (id === activeStreamId) {
+      cell.classList.add("active");
+    }
+
+    const header = document.createElement("div");
+    header.classList.add("stream-header");
+
+    const title = document.createElement("span");
+    title.textContent = `Camera ${id}`;
+
+    const minimizeBtn = document.createElement("button");
+    minimizeBtn.textContent = "—";
+    minimizeBtn.classList.add("minimize-btn");
+
+    header.appendChild(title);
+    header.appendChild(minimizeBtn);
+    cell.appendChild(header);
+
+    // Click to select this stream
+    cell.addEventListener("click", () => {
+      activeStreamId = id;
+      renderStreams(); // re-render to update borders
+    });
+
+    // Remove stream on minimize
+    minimizeBtn.addEventListener("click", (e) => {
+      e.stopPropagation(); // prevent cell click from triggering
+      const index = streams.indexOf(id);
+      if (index !== -1) {
+        streams.splice(index, 1);
+        if (activeStreamId === id) {
+          activeStreamId = null;
+        }
+        renderStreams();
+      }
+    });
+
     dash.appendChild(cell);
   });
+}
+
+function isActiveStreamAvailable() {
+  return activeStreamId !== null;
+}
+
+function startPTZ(action) {
+  if (!isActiveStreamAvailable()) return;
+  console.log(`Start PTZ ${action} on camera ${activeStreamId}`);
+  // Add your actual logic here
+}
+
+function stopPTZ(action) {
+  if (!isActiveStreamAvailable()) return;
+  console.log(`Stop PTZ ${action} on camera ${activeStreamId}`);
+}
+
+function startZoom(action) {
+  if (!isActiveStreamAvailable()) return;
+  console.log(`Start Zoom ${action} on camera ${activeStreamId}`);
+}
+
+function stopZoom(action) {
+  if (!isActiveStreamAvailable()) return;
+  console.log(`Stop Zoom ${action} on camera ${activeStreamId}`);
+}
+
+function captureSnapshot() {
+  if (!isActiveStreamAvailable()) return;
+  console.log(`Capture snapshot on camera ${activeStreamId}`);
 }

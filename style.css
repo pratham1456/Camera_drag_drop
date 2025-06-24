@@ -212,6 +212,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
+  padding-bottom: 1rem;
   gap: 1rem;
 }
 
@@ -311,7 +312,7 @@ body {
   }
 }
 
-.stream {
+/* .stream {
   background: #d7d8e3;
   border-radius: var(--radius);
   display: flex;
@@ -321,29 +322,99 @@ body {
   overflow: hidden;
   font-weight: 500;
   color: var(--text-dark);
+} */
+
+.stream {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--text-dark);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #f9f9fb;
+  transition: border 0.5s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-.stream::after {
-  content: "Camera " attr(data-id);
+.stream:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stream:not(.active) {
+  border: 2px solid #b7b7b7;
+}
+
+.stream.active {
+  border: 2px solid #00c853; /* modern green */
+  box-shadow: 0 0 0 4px rgba(0, 200, 83, 0.15); /* green glow effect */
+}
+
+.stream-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  font-weight: bold;
+  background: #e2e2f0;
 }
 
 .stream-content {
-  flex-grow: 1;
-  transition: max-height 0.3s ease;
+  padding: 10px;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
 }
 
 .stream-content.minimized {
   max-height: 0;
+  opacity: 0;
+  padding: 0;
   overflow: hidden;
 }
 
 .minimize-btn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  cursor: pointer;
-  background: #eee;
+  background: #fff;
   border: none;
-  padding: 4px 8px;
-  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Controls container: single horizontal line with no wrap */
+.controls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  overflow-x: auto;
+}
+
+/* Common button styling with responsive sizing */
+.control-btn {
+  padding: 0.75rem 1.125rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #ffffff;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8),
+    -3px -3px 6px rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.control-btn:hover {
+  background-color: var(--hover-clr);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), -2px -2px 4px rgba(7, 2, 2, 0.04);
 }

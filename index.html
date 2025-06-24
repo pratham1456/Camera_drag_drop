@@ -6,6 +6,11 @@
     <title>Home</title>
     <link rel="stylesheet" href="style.css" />
     <script type="text/javascript" src="app.js" defer></script>
+    <!-- Google Material Symbols for using icons in buttons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD@400,0,0"
+    />
   </head>
 
   <body>
@@ -185,6 +190,78 @@
         >
           Drag camera icons here
         </p>
+      </section>
+      <section class="control-panel">
+        <div class="controls">
+          <p class="camera-name">Camera Name</p>
+          <!-- PTZ Controls -->
+          <button
+            class="control-btn"
+            onmousedown="startPTZ('Up')"
+            onmouseup="stopPTZ('Up')"
+          >
+            <span class="material-symbols-outlined">arrow_upward</span> Up
+          </button>
+          <button
+            class="control-btn"
+            onmousedown="startPTZ('Down')"
+            onmouseup="stopPTZ('Down')"
+          >
+            <span class="material-symbols-outlined">arrow_downward</span> Down
+          </button>
+          <button
+            class="control-btn"
+            onmousedown="startPTZ('Left')"
+            onmouseup="stopPTZ('Left')"
+          >
+            <span class="material-symbols-outlined">arrow_back</span> Left
+          </button>
+          <button
+            class="control-btn"
+            onmousedown="startPTZ('Right')"
+            onmouseup="stopPTZ('Right')"
+          >
+            <span class="material-symbols-outlined">arrow_forward</span> Right
+          </button>
+
+          <!-- Zoom Controls -->
+          <button
+            class="control-btn"
+            onmousedown="startZoom('ZoomTele')"
+            onmouseup="stopZoom('ZoomTele')"
+          >
+            <span class="material-symbols-outlined">zoom_in</span> Zoom In
+          </button>
+          <button
+            class="control-btn"
+            onmousedown="startZoom('ZoomWide')"
+            onmouseup="stopZoom('ZoomWide')"
+          >
+            <span class="material-symbols-outlined">zoom_out</span> Zoom Out
+          </button>
+
+          <!-- Focus Controls -->
+          <button
+            class="control-btn"
+            onmousedown="startPTZ('FocusNear')"
+            onmouseup="stopPTZ('FocusNear')"
+          >
+            <span class="material-symbols-outlined">shadow_add</span> Focus In
+          </button>
+          <button
+            class="control-btn"
+            onmousedown="startPTZ('FocusFar')"
+            onmouseup="stopPTZ('FocusFar')"
+          >
+            <span class="material-symbols-outlined">shadow_minus</span> Focus
+            Out
+          </button>
+
+          <!-- Snapshot -->
+          <button class="control-btn" onclick="captureSnapshot()">
+            <span class="material-symbols-outlined">capture</span> Capture
+          </button>
+        </div>
       </section>
     </main>
   </body>
