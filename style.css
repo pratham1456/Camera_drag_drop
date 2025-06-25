@@ -418,3 +418,10 @@ body {
   transform: scale(0.95);
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), -2px -2px 4px rgba(7, 2, 2, 0.04);
 }
+
+.camera-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffffff;
+  transition: opacity 0.2s ease;
+}

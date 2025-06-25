@@ -129,6 +129,7 @@ function renderStreams() {
     cell.addEventListener("click", () => {
       activeStreamId = id;
       renderStreams(); // re-render to update borders
+      updateCameraName();
     });
 
     // Remove stream on minimize
@@ -139,6 +140,7 @@ function renderStreams() {
         streams.splice(index, 1);
         if (activeStreamId === id) {
           activeStreamId = null;
+          updateCameraName();
         }
         renderStreams();
       }
@@ -146,6 +148,25 @@ function renderStreams() {
 
     dash.appendChild(cell);
   });
+}
+
+function updateCameraName() {
+  const nameEl = document.getElementById("camera-name");
+
+  // Fade out
+  nameEl.style.opacity = 0;
+
+  setTimeout(() => {
+    // Update content after fade-out
+    if (activeStreamId !== null) {
+      nameEl.textContent = `Camera ${activeStreamId}`;
+    } else {
+      nameEl.textContent = `Camera Name`;
+    }
+
+    // Fade in
+    nameEl.style.opacity = 1;
+  }, 200); // duration matches CSS transition
 }
 
 function isActiveStreamAvailable() {
