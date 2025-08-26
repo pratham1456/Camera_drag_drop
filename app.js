@@ -121,8 +121,23 @@ function renderStreams() {
     minimizeBtn.textContent = "—";
     minimizeBtn.classList.add("minimize-btn");
 
+    const fullscreenBtn = document.createElement("span");
+    fullscreenBtn.classList.add("material-symbols-outlined", "fullscreen-btn");
+    fullscreenBtn.textContent = "open_in_full";
+    fullscreenBtn.title = "Maximize Stream";
+
+    fullscreenBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openModal(id);
+    });
+
+    const btn_container = document.createElement("div");
+    btn_container.classList.add("btn-container");
+
+    // btn_container.appendChild(fullscreenBtn);
+    btn_container.appendChild(minimizeBtn);
     header.appendChild(title);
-    header.appendChild(minimizeBtn);
+    header.appendChild(btn_container);
     cell.appendChild(header);
 
     // Click to select this stream
@@ -161,7 +176,7 @@ function updateCameraName() {
     if (activeStreamId !== null) {
       nameEl.textContent = `Camera ${activeStreamId}`;
     } else {
-      nameEl.textContent = `Camera Name`;
+      // nameEl.textContent = `Camera Name`;
     }
 
     // Fade in
@@ -198,3 +213,20 @@ function captureSnapshot() {
   if (!isActiveStreamAvailable()) return;
   console.log(`Capture snapshot on camera ${activeStreamId}`);
 }
+
+// Check device width on load and resize
+function checkDeviceWidth() {
+  const messageElement = document.getElementById("unsupported-device-message");
+  if (window.innerWidth < 1020) {
+    // Same breakpoint as your media query
+    messageElement.style.display = "flex";
+    document.body.style.overflow = "hidden"; // Prevent scrolling
+  } else {
+    messageElement.style.display = "none";
+    document.body.style.overflow = ""; // Restore scrolling
+  }
+}
+
+// Run on load and when window is resized
+window.addEventListener("load", checkDeviceWidth);
+window.addEventListener("resize", checkDeviceWidth);

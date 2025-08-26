@@ -425,3 +425,56 @@ body {
   color: #ffffff;
   transition: opacity 0.2s ease;
 }
+
+.btn-container {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 1440px) {
+  p#camera-name {
+    font-size: 1rem;
+  }
+
+  button.control-btn {
+    font-size: 0.8rem;
+  }
+  .controls {
+    gap: 6px;
+  }
+}
+
+#unsupported-device-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--base-clr);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.message-container {
+  max-width: 500px;
+  padding: 2rem;
+  background-color: var(--hover-clr);
+  border-radius: var(--radius);
+  border: 1px solid var(--line-clr);
+}
+
+.message-container h2 {
+  color: var(--accent-clr);
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 1020px) {
+  #unsupported-device-message {
+    display: none !important;
+  }
+}

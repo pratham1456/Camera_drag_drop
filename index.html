@@ -14,6 +14,15 @@
   </head>
 
   <body>
+    <div id="unsupported-device-message" style="display: none">
+      <div class="message-container">
+        <h2>Unsupported Device</h2>
+        <p>
+          This page is not optimized for tablet or mobile devices. Please use a
+          desktop computer for the best experience.
+        </p>
+      </div>
+    </div>
     <nav id="sidebar">
       <ul>
         <li>
@@ -193,7 +202,7 @@
       </section>
       <section class="control-panel">
         <div class="controls">
-          <p class="camera-name" id="camera-name">Camera Name</p>
+          <p class="camera-name" id="camera-name"></p>
           <!-- PTZ Controls -->
           <button
             class="control-btn"
